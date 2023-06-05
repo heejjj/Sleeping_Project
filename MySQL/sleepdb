@@ -1,0 +1,32 @@
+DROP DATABASE IF EXISTS sleepdb; -- 만약 sleepdb가 존재하면 우선 삭제한다
+CREATE DATABASE sleepdb;
+
+USE sleepdb;
+CREATE TABLE sleepdataTBL -- 수면 정보 테이블
+( idx INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+  user_name CHAR(10) NOT NULL, -- 사용자 이름
+  start_time DATE NOT NULL, -- 수면 시작시간(취침시간)
+  end_time DATE NOT NULL, -- 수면 종료시간(기상시간) 
+  duration NUMERIC NOT NULL, -- 수면 경과시간
+  value CHAR(5) NOT NULL, -- 수면 상태
+  source CHAR(25) NOT NULL -- 측정 기기  
+);
+
+CREATE TABLE sleepeditTBL -- 수면 정보 전처리 테이블
+( idx INT AUTO_INCREMENT NOT NULL PRIMARY KEY, 
+  user_name CHAR(10) NOT NULL, -- 사용자 이름
+  start_time DATE NOT NULL, -- 수면 시작시간(취침시간)
+  end_time DATE NOT NULL, -- 수면 종료시간(기상시간)
+  duration NUMERIC NOT NULL, -- 수면 경과시관
+  value CHAR(5) NOT NULL, -- 수면 상태
+  source CHAR(25) NOT NULL, -- 측정 기기
+  year_month_day DATE NOT NULL, -- 날짜 
+  weekday INT NOT NULL -- 요일
+);
+
+CREATE TABLE heartrateTBL -- HRV 데이터 테이블 
+( idx INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
+  timestamp DATE NOT NULL, -- 기록시간 
+  heart_rate INT NOT NULL, -- HRV
+  source_name CHAR(30) NOT NULL -- 측정 기기
+);
